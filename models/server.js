@@ -19,6 +19,9 @@ class Server {
 
     // Configuracion de socket
     this.io = socketio(this.server,{/* Configuraciones */});
+    
+    // Inicializar Sockets
+    this.sockets = new Sockets(this.io); 
   }
   middlewares(){
     //Desplegar el directorio publico
@@ -26,16 +29,18 @@ class Server {
 
     //Habilitar CORS
     this.app.use( cors() );
-  }
-  configurarSockets(){
-    new Sockets(this.io)
+
+    // Crear la instancia de nuestro ticketlist
+    this.app.get('/ultimos', (request, response) => { 
+      response.json({
+        ok: true,
+        ultimos: this.sockets.ticketList.ultimos13
+      })
+    });
   }
   execute(){
     //Inicializar Middleware
     this.middlewares();
-
-    //Inicializar sockets
-    this.configurarSockets();
 
     this.server.listen(this.port,() => {
       console.log(`Servidor corriendo en http://localhost:${this.port}/`);
