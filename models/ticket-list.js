@@ -1,23 +1,23 @@
 const Ticket = require('./ticket');
 
-class ticketList {
+class TicketList {
   
   constructor (){
-    this.ultimoNumero = 0;
+    this.ultimoNumero = 1;
     this.ticketsPendientes = [];
     this.ticketsAsignados = [];
   }
 
-  getNextNumber(){
-    return this.ultimoNumero ++; 
+  get nextNumber(){
+    return this.ultimoNumero++; 
   }
   // 3 que se veran es las tarjetas y 10 en el historial
-  getUltimos13(){
+  get ultimos13(){
     return this.ticketsAsignados.slice(0,13);
   }
   
   createTicket(){
-    const newTicket = new Ticket(this.getNextNumber);
+    const newTicket = new Ticket(this.nextNumber);
     this.ticketsPendientes.push(newTicket);
     return newTicket;
   }
