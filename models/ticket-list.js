@@ -32,8 +32,8 @@ class TicketList {
      * Si el array está vacío, se devuelve undefined y el array no se modifica.
      */
     const nextTicket = this.ticketsPendientes.shift();
-      newTicket.agente = agente;
-      newTicket.escritorio = escritorio;
+      nextTicket.agente = agente;
+      nextTicket.escritorio = escritorio;
    
     /**
      * @unshift
